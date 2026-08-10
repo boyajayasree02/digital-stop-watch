@@ -1,0 +1,113 @@
+:root {
+  --ink: #f5f7f4;
+  --muted: #8d9792;
+  --panel: #151b19;
+  --panel-light: #1d2522;
+  --line: #2d3934;
+  --accent: #b8f34a;
+  --accent-dark: #1b2810;
+  --pause: #e6b85c;
+  --reset: #ff766c;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  color: var(--ink);
+  background: #0b100f;
+  font-family: 'Trebuchet MS', sans-serif;
+}
+
+body::before {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  content: '';
+  opacity: .45;
+  background: linear-gradient(135deg, rgba(184, 243, 74, .07), transparent 42%), repeating-linear-gradient(135deg, transparent 0 18px, rgba(255,255,255,.018) 19px 20px);
+}
+
+.stopwatch-app {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 32px 18px;
+}
+
+.stopwatch-panel {
+  width: min(100%, 760px);
+  padding: clamp(28px, 7vw, 68px);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, .35);
+  animation: appear .5s ease-out both;
+}
+
+.eyebrow {
+  margin: 0 0 12px;
+  color: var(--accent);
+  font-size: .7rem;
+  font-weight: 800;
+  letter-spacing: .2em;
+}
+
+h1, h2, p { margin-top: 0; }
+
+h1 {
+  margin-bottom: 38px;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  letter-spacing: -.04em;
+}
+
+.timer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(7px, 2vw, 16px);
+  color: var(--accent);
+  font-family: Consolas, monospace;
+  font-size: clamp(2.8rem, 10vw, 7.5rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -.08em;
+  white-space: nowrap;
+  text-shadow: 0 0 26px rgba(184, 243, 74, .16);
+}
+
+.separator { color: #61705e; }
+.timer-label { margin: 18px 0 42px; color: var(--muted); font-size: clamp(.48rem, 1.3vw, .7rem); letter-spacing: .12em; text-align: center; white-space: nowrap; }
+
+.controls { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 52px; }
+.button { flex: 1 1 130px; min-height: 50px; padding: 12px 20px; border: 1px solid transparent; border-radius: 4px; color: #101510; cursor: pointer; font: 700 .9rem 'Trebuchet MS', sans-serif; transition: transform .2s, filter .2s, background .2s; }
+.button:hover, .clear-button:hover { filter: brightness(1.12); transform: translateY(-2px); }
+.button:active, .clear-button:active { transform: translateY(0); }
+.button-start { background: var(--accent); }
+.button-pause { color: #211b0d; background: var(--pause); }
+.button-reset { color: #291110; background: var(--reset); }
+.button-lap { color: var(--ink); background: var(--panel-light); border-color: var(--line); }
+
+.lap-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+h2 { margin-bottom: 0; font-size: 1rem; }
+h2 span { display: inline-grid; place-items: center; min-width: 24px; height: 24px; margin-left: 5px; border-radius: 50%; color: var(--accent-dark); background: var(--accent); font-size: .7rem; vertical-align: middle; }
+.clear-button { padding: 7px 0; border: 0; color: var(--muted); background: transparent; cursor: pointer; font: 600 .78rem 'Trebuchet MS', sans-serif; transition: color .2s, transform .2s; }
+.clear-button:hover { color: var(--ink); }
+.laps { max-height: 220px; margin: 0; padding: 0; overflow-y: auto; list-style: none; }
+.lap, .empty-state { display: flex; align-items: center; justify-content: space-between; padding: 14px 4px; border-bottom: 1px solid rgba(45, 57, 52, .7); color: var(--muted); font-family: Consolas, monospace; font-size: .85rem; }
+.lap strong { color: var(--ink); font-weight: 400; }
+.empty-state { justify-content: center; border-bottom: 0; font-family: 'Trebuchet MS', sans-serif; font-size: .8rem; }
+
+@keyframes appear { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 480px) {
+  .stopwatch-app { padding: 18px 12px; }
+  .stopwatch-panel { padding: 28px 18px; }
+  h1 { margin-bottom: 30px; }
+  .timer { gap: 4px; font-size: clamp(2.2rem, 12vw, 3.8rem); }
+  .timer-label { font-size: .42rem; letter-spacing: .04em; }
+  .controls { margin-bottom: 40px; }
+  .button { flex-basis: 100%; }
+}
